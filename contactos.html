@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vortex - Contacto</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+    <style>
+      .navbar-brand {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+      .form-container {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/login.html">Vortex</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="productos.html">Productos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="contactos.html">Contacto</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link btn btn-primary text-white" href="/carrito.html">Carrito</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Formulario de Contacto -->
+      <div class="container my-5">
+        <h2 class="text-center mb-4">Contáctanos</h2>
+        <div class="form-container">
+          <form @submit.prevent="enviarFormulario">
+            <div class="mb-3">
+              <label for="nombre" class="form-label">Nombre</label>
+              <input type="text" id="nombre" class="form-control" v-model="form.nombre" required />
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Correo Electrónico</label>
+              <input type="email" id="email" class="form-control" v-model="form.email" required />
+            </div>
+            <div class="mb-3">
+              <label for="mensaje" class="form-label">Mensaje</label>
+              <textarea
+                id="mensaje"
+                class="form-control"
+                rows="5"
+                v-model="form.mensaje"
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Enviar</button>
+          </form>
+          <div v-if="mensajeEnviado" class="alert alert-success mt-4">
+            ¡Gracias por contactarnos, {{ form.nombre }}! Hemos recibido tu mensaje.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Vue.js Script -->
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            form: {
+              nombre: '',
+              email: '',
+              mensaje: '',
+            },
+            mensajeEnviado: false,
+          }
+        },
+        methods: {
+          enviarFormulario() {
+            // Lógica para manejar el envío del formulario
+            this.mensajeEnviado = true
+            // Reiniciar el formulario después de enviar
+            this.form = { nombre: '', email: '', mensaje: '' }
+            // Puedes agregar aquí una integración con un backend o servicio de correo.
+          },
+        },
+      })
+      app.mount('#app')
+    </script>
+  </body>
+</html>

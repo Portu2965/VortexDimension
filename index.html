@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vortex - Tienda de Ropa</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+    <style>
+      .navbar-brand {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+      .product-card img {
+        height: 200px;
+        object-fit: cover;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/login.html">Vortex</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/index.html">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/productos.html">Productos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/contactos.html">Contacto</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link btn btn-primary text-white" href="/carrito.html">Carrito</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Carrusel -->
+      <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img
+              src="/images/Vortex - Hoodie Black.png"
+              class="d-block w-100"
+              alt="Imagen destacada 1"
+            />
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Nueva Colección</h5>
+              <p>Explora lo último en moda de Vortex.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img
+              src="/images/Vortex - Gray Hoodie Back.png"
+              class="d-block w-100"
+              alt="Imagen destacada 2"
+            />
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Ofertas Exclusivas</h5>
+              <p>Aprovecha hasta un 50% de descuento.</p>
+            </div>
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExample"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExample"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+      <!-- Productos -->
+      <div class="container my-5">
+        <h2 class="text-center mb-4">Nuestros Productos</h2>
+        <div class="row">
+          <div class="col-md-4" v-for="producto in productos" :key="producto.id">
+            <div class="card product-card">
+              <img :src="producto.imagen" class="card-img-top" :alt="producto.nombre" />
+              <div class="card-body">
+                <h5 class="card-title">{{ producto.nombre }}</h5>
+                <p class="card-text">{{ producto.descripcion }}</p>
+                <p class="text-primary fw-bold">{{ producto.precio | currency }}</p>
+                <a href="/producto.html" class="btn btn-primary">Comprar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Vue.js Script -->
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            productos: [
+              {
+                id: 1,
+                nombre: 'Vortex - Black Tee',
+                descripcion: 'Camiseta 100% Cotton con estampado.',
+                precio: 19.99,
+                imagen: '/images/Vortex - Gray Tee Back.png',
+              },
+              {
+                id: 2,
+                nombre: 'Vortex - Light Blue Tee',
+                descripcion: 'Camiseta 100% Cotton con estampado.',
+                precio: 19.99,
+                imagen: '/images/Vortex - Light Blue Tee Back.png',
+              },
+              {
+                id: 3,
+                nombre: 'Vortex - Light Gray Tee',
+                descripcion: 'Camiseta 100% Cotton con estampado.',
+                precio: 19.99,
+                imagen: '/images/Vortex - Light Gray Tee Back.png',
+              },
+            ],
+          }
+        },
+        filters: {
+          currency(value) {
+            return `$${value.toFixed(2)}`
+          },
+        },
+      })
+      app.mount('#app')
+    </script>
+  </body>
+</html>
